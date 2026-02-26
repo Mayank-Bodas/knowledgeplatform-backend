@@ -38,9 +38,9 @@ src/main/java/com/mayank/knowledgeplatform/
   - **UI/API Coordination:** Identifying and fixing a 404 error where the backend was incorrectly extracting the username instead of the email from the JWT principal for author lookups.
   - **Troubleshooting:** Identifying and resolving HTTP 500 errors, such as explicitly handling `BadCredentialsException` to return a 401 Unauthorized status.
 - **What Was Reviewed/Corrected Manually:**
-  - Manually provided the architecture requirements, database credentials, and Groq API keys.
-  - Requested specific prompt testing and validated integration logic.
-  - Coordinated the division of the monolithic repository into separate frontend and backend Git repositories to ensure clean CI/CD setups.
+  - **JWT Security Filters:** Generated the baseline Spring Security config with AI, but manually implemented the complete `AuthTokenFilter` logic. Specifically designed how the stateless token is parsed from the `Authorization` header, validated, and injected into the `SecurityContextHolder` to secure the API routes.
+  - **Global Exception Handling:** Built the `GlobalExceptionHandler` to cleanly intercept and map system exceptions (like `BadCredentialsException`) into structured, frontend-friendly 401 JSON responses instead of generic 500 server crashes.
+  - **AI Service Integration:** Used AI for the basic models, but manually handled the core integration with the GroqCloud API using `RestTemplate`. Engineered the dynamic request payload generation, handled error fallbacks, and parsed the complex JSON nested responses back into cleaner DTOs for the application layer.
 
 ## 3️⃣ Setup Instructions
 
